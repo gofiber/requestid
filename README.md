@@ -15,7 +15,7 @@ import
 func main() {
   app := fiber.New()
 
-  app.Use(logger.requestid())
+  app.Use(requestid.New())
 
   app.Get("/", func(c *fiber.Ctx) {
     c.Send("Hello, World!")
