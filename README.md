@@ -12,6 +12,11 @@ go get -u github.com/gofiber/requestid
 | Skip | `func(*fiber.Ctx) bool` | A function to skip the middleware | `nil` |
 | Generator | ` func() string` | A function to generate an ID.e | `return uuid.New().String()` |
 
+### Signature
+```go
+requestid.New(config ...requestid.Config) func(*Ctx)
+```
+
 ### Example
 ```go
 package main
@@ -24,16 +29,8 @@ import (
 func main() {
   app := fiber.New()
   
-  // Without config
   app.Use(requestid.New())
   
-  // With config
-  app.use(requestid.New(requestid.Config{
-    Generator: func() string {
-      return rand.New(rand.NewSource(time.Now().UnixNano()))
-    },
-  }))
-
   app.Get("/", func(c *fiber.Ctx) {
     c.Send("Hello, World!")
   })
