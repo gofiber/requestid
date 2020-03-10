@@ -11,9 +11,7 @@ go get -u github.com/gofiber/requestid
 | Property | Type | Description | Default |
 | :--- | :--- | :--- | :--- |
 | Skip | `func(*fiber.Ctx) bool` | Defines a function to skip middleware | `nil` |
-| Generator | ` func() string` | Generator defines a function to generate an ID.e | `func() string { 
-  return uuid.New().String() 
-}` |
+| Generator | ` func() string` | Generator defines a function to generate an ID.e | `func() string {   return uuid.New().String() }` |
 
 ### Example
 ```go
