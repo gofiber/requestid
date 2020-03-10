@@ -1,4 +1,5 @@
-**RequestID** adds an indentifier to the response using the `X-Request-ID` header
+### RequestID
+Adds an indentifier to the response using the `X-Request-ID` header
 
 ### Install
 ```
