@@ -7,16 +7,16 @@ go get -u github.com/gofiber/fiber
 go get -u github.com/gofiber/requestid
 ```
 
+### Signature
+```go
+requestid.New(config ...requestid.Config) func(*Ctx)
+```
+
 ### Config
 | Property | Type | Description | Default |
 | :--- | :--- | :--- | :--- |
 | Skip | `func(*fiber.Ctx) bool` | A function to skip the middleware | `nil` |
 | Generator | ` func() string` | A function to generate an ID.e | `return uuid.New().String()` |
-
-### Signature
-```go
-requestid.New(config ...requestid.Config) func(*Ctx)
-```
 
 ### Example
 ```go
