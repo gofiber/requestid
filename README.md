@@ -9,7 +9,7 @@ go get -u github.com/gofiber/requestid
 
 ### Signature
 ```go
-requestid.New(config ...requestid.Config) func(*Ctx)
+requestid.New(config ...requestid.Config) func(*fiber.Ctx)
 ```
 
 ### Config
