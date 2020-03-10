@@ -23,8 +23,16 @@ import (
 
 func main() {
   app := fiber.New()
-
+  
+  // Without config
   app.Use(requestid.New())
+  
+  // With config
+  app.use(requestid.New(requestid.Config{
+    Generator: func() string {
+      return rand.New(rand.NewSource(time.Now().UnixNano()))
+    },
+  }))
 
   app.Get("/", func(c *fiber.Ctx) {
     c.Send("Hello, World!")
