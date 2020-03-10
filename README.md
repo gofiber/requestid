@@ -1,6 +1,5 @@
-## BasicAuth
-
-Basic auth middleware provides an HTTP basic authentication. It calls the next handler for valid credentials and "401 - Unauthorized" for missing or invalid credentials.
+## RequestID
+RequestID adds an indentifier to the response using the `X-Request-ID` header
 
 ### Install
 ```
