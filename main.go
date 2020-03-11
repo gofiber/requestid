@@ -11,9 +11,9 @@ import (
 
 // Config defines the config for RequestID middleware
 type Config struct {
-	// Skip defines a function to skip middleware.
+	// Filter defines a function to skip middleware.
 	// Optional. Default: nil
-	Skip func(*fiber.Ctx) bool
+	Filter func(*fiber.Ctx) bool
 	// Generator defines a function to generate an ID.
 	// Optional. Default: func() string {
 	//   return uuid.New().String()
@@ -36,8 +36,8 @@ func New(config ...Config) func(*fiber.Ctx) {
 	}
 	// Return middleware handler
 	return func(c *fiber.Ctx) {
-		// Skip middleware if Skip returns true
-		if cfg.Skip != nil && cfg.Skip(c) {
+		// Filter request to skip middleware
+		if cfg.Filter != nil && cfg.Filter(c) {
 			c.Next()
 			return
 		}
