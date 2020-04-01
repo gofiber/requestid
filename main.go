@@ -47,8 +47,17 @@ func New(config ...Config) func(*fiber.Ctx) {
 		if rid == "" {
 			rid = cfg.Generator()
 		}
+		c.Locals(fiber.HeaderXRequestID, rid)
 		c.Next()
 		// Set X-Request-ID
 		c.Set(fiber.HeaderXRequestID, rid)
 	}
+}
+
+func Get(c *fiber.Ctx) string {
+	rid := c.Locals(fiber.HeaderXRequestID)
+	if v, ok := rid.(string); ok {
+		return v
+	}
+	return ""
 }

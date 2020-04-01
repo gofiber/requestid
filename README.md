@@ -39,6 +39,32 @@ func main() {
   app.Listen(3000)
 }
 ```
+
+### Get request ID in handler
+
+```go
+package main
+
+import (
+	"github.com/gofiber/fiber"
+
+	"github.com/gofiber/requestid"
+)
+
+func main() {
+	app := fiber.New()
+
+	app.Use(requestid.New())
+
+	app.Get("/", func(c *fiber.Ctx) {
+		rid := requestid.Get(c)
+		c.Send("your rid should be " + rid)
+	})
+
+	app.Listen(3000)
+}
+```
+
 ### Test
 ```curl
 curl -I http://localhost:3000
