@@ -47,8 +47,9 @@ func New(config ...Config) func(*fiber.Ctx) {
 		if rid == "" {
 			rid = cfg.Generator()
 		}
-		c.Next()
 		// Set X-Request-ID
 		c.Set(fiber.HeaderXRequestID, rid)
+
+		c.Next()
 	}
 }
