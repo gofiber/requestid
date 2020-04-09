@@ -33,7 +33,7 @@ func main() {
   app.Use(requestid.New())
   
   app.Get("/", func(c *fiber.Ctx) {
-    c.Send("Hello, World!")
+    c.Send(requestid.Get(c))
   })
 
   app.Listen(3000)
