@@ -5,6 +5,8 @@
 package requestid
 
 import (
+	"unsafe"
+
 	"github.com/gofiber/fiber"
 	"github.com/google/uuid"
 )
@@ -21,9 +23,8 @@ type Config struct {
 	Generator func() string
 }
 
-// New adds an indentifier to the request using the `X-Request-ID` header
+// New adds an indentifier to the request
 func New(config ...Config) func(*fiber.Ctx) {
-	// Init config
 	var cfg Config
 	if len(config) > 0 {
 		cfg = config[0]
@@ -34,21 +35,26 @@ func New(config ...Config) func(*fiber.Ctx) {
 			return uuid.New().String()
 		}
 	}
-	// Return middleware handler
+	// Return middleware
 	return func(c *fiber.Ctx) {
-		// Filter request to skip middleware
-		if cfg.Filter != nil && cfg.Filter(c) {
-			c.Next()
-			return
-		}
-		// Get value from RequestID
+		// Get id from request
 		rid := c.Get(fiber.HeaderXRequestID)
-		// Create new ID
+		// Create new id if empty
 		if rid == "" {
 			rid = cfg.Generator()
 		}
-		c.Next()
-		// Set X-Request-ID
+		// Set new id to response
 		c.Set(fiber.HeaderXRequestID, rid)
+		// Bye
+		c.Next()
 	}
+}
+
+// Get returns the request identifier
+func Get(c *fiber.Ctx) string {
+	return getString(c.Fasthttp.Response.Header.Peek(fiber.HeaderXRequestID))
+}
+
+func getString(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
 }
