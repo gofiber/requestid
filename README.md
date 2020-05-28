@@ -1,4 +1,9 @@
-### RequestID
+# Request ID
+
+![Test](https://github.com/gofiber/requestid/workflows/Test/badge.svg)
+![Security](https://github.com/gofiber/requestid/workflows/Security/badge.svg)
+![Linter](https://github.com/gofiber/requestid/workflows/Linter/badge.svg)
+
 Adds an indentifier to the response using the `X-Request-ID` header
 
 ### Install
