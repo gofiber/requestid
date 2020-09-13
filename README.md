@@ -1,3 +1,3 @@
 # ⚠️ Deprecated repository
 
-This middleware is no longer maintained, please use the [Fiber RequestID](https://github.com/gofiber/fiber/blob/master/middleware/request_id.md) middleware
+This middleware is no longer maintained, it is available within [Fiber v2](https://github.com/gofiber/fiber/tree/master/middleware/requestid).
